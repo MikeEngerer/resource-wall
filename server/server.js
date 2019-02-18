@@ -12,9 +12,18 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
+app.post('/login', (req, res) => {
+	let { email, name } = req.body
+	knex('Users')
+		.returning('*')
+		.where('email', email)
+		.then(res => {
+			console.log(res)
+		})
+
+})
 app.post('/register', (req, res) => {
 	let { email, name } = req.body
-	console.log(email, name)
 	knex('Users')
 		.insert({name, email})
 		.then()

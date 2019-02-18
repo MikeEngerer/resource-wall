@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-// import { BrowserRouter } from 'react-router-dom';
+import {
+  BrowserRouter, Link, Route 
+} from 'react-router-dom';
 
+import Login from './users/Login.jsx'
 import Card from './board/Card.jsx';
 import Register from './users/Register.jsx';
 import './App.css';
@@ -30,10 +33,16 @@ class App extends Component {
   };
 
   render() {
-    return <div>
-        <Register />
-      </div>
-    
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Link to="/register"> Register </Link>
+          <Link to="/login"> Login </Link>
+          <Route path="/login" component={Login}/>
+          <Route path="/register" component={Register}/>
+        </div>
+      </BrowserRouter>
+    );
   }
 }
 
