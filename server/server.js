@@ -22,30 +22,55 @@ app.get('/', function (req, res) {
 app.post('/login', (req, res) => {
 	let { email, password } = req.body
 	knex('Users')
-		.returning('*')
-		.where('email', email)
-		.then(resp => {
-			if (bcrypt.compare(password, resp.password)) {
-				res.send({ loggedIn: true })
-			} else {
-				res.send({ loggedIn: false })
-			}
-		})
-
+	.returning('*')
+	.where('email', email)
+	.then(resp => {
+		if (resp.length !== 0) {
+			bcrypt.compare(password, resp[0].password, (err, result) => {
+				if (result) {
+					req.session.id = uuid()
+					res.send({result: 'success'})
+				} else {
+					res.send({result: 'invalid password'})
+				}
+			})
+		} else {
+			res.send({result: 'invalid email or password'})
+		}
+	})
 })
+
 app.post('/register', (req, res) => {
 	let { email, name, password } = req.body
-	password = bcrypt.hash(password, 10, (err, hash) => {
-		knex('Users')
-			.insert({name, email, password: hash})
-			.then()
+	knex('Users')
+	.returning('*')
+	.where('email', email)
+	.then(resp => {
+		console.log(resp)
+		if (resp[0]) {
+			res.send({result: 'User already exists'})
+		} else {
+			password = bcrypt.hash(password, 10, (err, hash) => {
+				knex('Users')
+				.insert({name, email, password: hash})
+				.then(() => {
+          req.session.id = uuid()
+          res.send({result: 'success'})
+        })
+			})
+		}
 	})
 
 })
 
-app.get('/server', (req, res) => {
-  res.send({express: 'server connected to react' });
+app.post('/logout', (req, res) => {
+	req.session = null;
+	res.send({result: 'Successfully logged out'})
 })
+
+// app.get('/server', (req, res) => {
+//   res.send({express: 'server connected to react' });
+// })
  
 app.listen(8080, () => {
 	console.log('app listening on 8080')

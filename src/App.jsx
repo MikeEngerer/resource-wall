@@ -4,45 +4,48 @@ import {
 } from 'react-router-dom';
 
 import Login from './users/Login.jsx'
+import Logout from './users/Logout.jsx'
 import Card from './board/Card.jsx';
 import Register from './users/Register.jsx';
+import Main from './main/main.jsx'
 import './App.css';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      data: null
+      isAuthed: false
     }
   }
 
-  componentDidMount() {
-      // Call our fetch function below once the component mounts
-    this.callBackendAPI()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+  handleUserAuth = (data) => {
+    let { isAuthed } =  data
+    this.setState({isAuthed})
   }
-    // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('/server');
-    const body = await response.json();
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
-  };
 
   render() {
-    return (
-      <BrowserRouter>
-        <div className="App">
-          <Link to="/register"> Register </Link>
-          <Link to="/login"> Login </Link>
-          <Route path="/login" component={Login}/>
-          <Route path="/register" component={Register}/>
+    if (this.state.isAuthed) {
+      return (
+        <BrowserRouter>
+        <div>
+          <Logout handleUserAuth={this.handleUserAuth}/>
+          <Main />
         </div>
-      </BrowserRouter>
-    );
+        </BrowserRouter>
+      )
+    } else {
+      return (
+        <BrowserRouter>
+          <div className="App">
+            <Link to="/register"><button> Register </button></Link>
+            <Link to="/login"><button> Login </button></Link>
+            <Route path="/login" component={() => <Login handleUserAuth={this.handleUserAuth} />}/>
+            <Route path="/register" component={() => <Register handleUserAuth={this.handleUserAuth} />}/>
+            <Main />
+          </div>
+        </BrowserRouter>
+      );
+    }
   }
 }
 

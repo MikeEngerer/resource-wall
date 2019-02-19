@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Cookie from 'react-cookie'
+import Cookie from 'universal-cookie'
 
 class Login extends Component {
 
@@ -19,14 +19,12 @@ class Login extends Component {
     	}
     	axios.post('/login', credentials)
     		.then(res => {
-    			if (res.data.loggedIn) {
-    				const cookie = new Cookie();
-    				cookie.set('id', 1)
+    			if (res.data.result == 'success') {
+    				this.props.handleUserAuth({isAuthed: true})
+    			} else {
+    				alert(res.data.result)
     			}
-    			this.setState({loggedIn: res.data.loggedIn}, () => {
-    				console.log('state', this.state)
-    			})
-    		})
+    		}) 
     }
 
     render() {
