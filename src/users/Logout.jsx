@@ -4,7 +4,6 @@ import axios from 'axios';
 class Logout extends Component {
 
 	handleLogout = (e) => {
-		console.log(e)
 		e.preventDefault()
 		axios.post('/logout')
 			.then(res => {

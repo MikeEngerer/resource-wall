@@ -25,7 +25,7 @@ app.post('/login', (req, res) => {
 	.returning('*')
 	.where('email', email)
 	.then(resp => {
-		if (resp.length !== 0) {
+		if (resp[0]) {
 			bcrypt.compare(password, resp[0].password, (err, result) => {
 				if (result) {
 					req.session.id = uuid()

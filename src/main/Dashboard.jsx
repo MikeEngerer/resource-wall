@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Main extends Component {
+class Dashboard extends Component {
     render() {
         return (
             <div>
-            	<p>Im Authed!</p>
+            	<p>Dashboard</p>
             </div>
         );
     }
 }
 
-export default Main;
+export default Dashboard;
