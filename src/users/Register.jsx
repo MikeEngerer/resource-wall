@@ -6,7 +6,6 @@ class Register extends Component {
 
   handleRegister = (e) => {
     e.preventDefault()
-    console.log('here')
     let data = {
       email: e.target.email.value,
       name: e.target.name.value,

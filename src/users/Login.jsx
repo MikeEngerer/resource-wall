@@ -4,13 +4,6 @@ import Cookie from 'universal-cookie'
 
 class Login extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-        	loggedIn: false
-        }
-    }
-
     handleLogin = (e) => {
     	e.preventDefault();
     	let credentials = {

@@ -41,7 +41,6 @@ class App extends Component {
             <Link to="/login"><button> Login </button></Link>
             <Route path="/login" component={() => <Login handleUserAuth={this.handleUserAuth} />}/>
             <Route path="/register" component={() => <Register handleUserAuth={this.handleUserAuth} />}/>
-            <Main />
           </div>
         </BrowserRouter>
       );
