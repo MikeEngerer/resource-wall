@@ -35,19 +35,10 @@ button:hover {
   margin-bottom: 5px;
 }
 
-/*.login-form button {
-  background-color: blue;
-  border:none;
-  color: white;
-  margin: 5px;
-  height: 30px;
-  width: calc(auto + 20px);
-}*/
-
-.login-form input:focus {
+/*.login-form input:focus {
   outline: none;
 }
 
 .login-form button:hover {
   background-color: green;
-}
+}*/
