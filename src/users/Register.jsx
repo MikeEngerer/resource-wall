@@ -14,33 +14,27 @@ class Register extends Component {
       password: e.target.password.value
     }
     if (data.password !== e.target.passwordConfirm.value) {
-      alert('passwords must match')
-      return
+      return alert('passwords must match')
     }
     axios.post('/register', data)
       .then(res => {
-        if (res.data.result !== 'success') {
-          alert(res.data.result)
-          return
-        } else {
-          this.props.handleUserAuth({isAuthed: true})
-        }
+        res.data.result === 'success' ? this.props.handleUserAuth({isAuthed: true}) : alert(res.data.result)
       })
   }
 
 	render() {
 		return (         
 		<section id="register">
-            <h1>Register</h1>
-            <form onSubmit={ this.handleRegister } >
-              <input type="email" name="email" placeholder="Email"/>
-              <input type="text" name="name" placeholder="Name"/>
-              <input type="password" name="password" placeholder="Password" />
-              <input type="password" name="passwordConfirm" placeholder="Confirm password" />
-              <button>Login</button>
-            </form>
-          </section>
-        )
+        <h1>Register</h1>
+        <form onSubmit={ this.handleRegister } >
+          <input type="email" name="email" placeholder="Email"/>
+          <input type="text" name="name" placeholder="Name"/>
+          <input type="password" name="password" placeholder="Password" />
+          <input type="password" name="passwordConfirm" placeholder="Confirm password" />
+          <button>Login</button>
+        </form>
+      </section>
+    )
 	}
 }
 export default Register;

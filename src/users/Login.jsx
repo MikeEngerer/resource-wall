@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import axios from 'axios';
-import Cookie from 'universal-cookie'
 
 class Login extends Component {
 
@@ -24,7 +25,7 @@ class Login extends Component {
         return (
           <section id="login">
             <h1>Login</h1>
-            <form onSubmit={ this.handleLogin } >
+            <form onSubmit={ this.handleLogin }>
               <input type="email" name="email" placeholder="Email"/>
               <input type="password" name="password" placeholder="Password" />
               <button type="submit">Login</button>

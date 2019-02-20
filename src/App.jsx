@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter, Link, Route, Redirect 
+  BrowserRouter, Link, Route, Redirect, Switch 
 } from 'react-router-dom';
 import axios from 'axios';
 
@@ -26,9 +26,8 @@ class App extends Component {
   handleLogout = (e) => {
     e.preventDefault()
     axios.post('/logout')
-      .then(res => {
-        let data = { isAuthed: false }
-        this.handleUserAuth(data)
+      .then(() => {
+        this.setState({ isAuthed: false })
       })
   }
 
@@ -39,7 +38,7 @@ class App extends Component {
           <div className="login-nav">
             { this.state.isAuthed ?
               <div>
-                <Redirect to="/" /> 
+                <Redirect to="/dashboard" />
                 <button onClick={this.handleLogout}>Log out</button>
               </div>
               :
