@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter, Link, Route, Redirect, Switch 
-} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 
-import Login from './users/Login.jsx'
-import Card from './board/Card.jsx';
-import Register from './users/Register.jsx';
+import LoginNav from './users/LoginNav.jsx'
 import Dashboard from './main/Dashboard.jsx'
 import './App.css';
 
@@ -35,21 +31,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <div className="login-nav">
-            { this.state.isAuthed ?
-              <div>
-                <Redirect to="/dashboard" />
-                <button onClick={this.handleLogout}>Log out</button>
-              </div>
-              :
-              <div>
-                <Link to="/login"><button> Login </button></Link>
-                <Link to="/register"><button> Register </button></Link>
-                <Route path="/login" component={() => <Login handleUserAuth={this.handleUserAuth} />}/>
-                <Route path="/register" component={() => <Register handleUserAuth={this.handleUserAuth} />}/>
-              </div>
-            }
-          </div>
+          <LoginNav 
+            isAuthed={this.state.isAuthed} 
+            handleUserAuth={this.handleUserAuth} 
+            handleLogout={this.handleLogout}
+          />
           <Dashboard />
         </div>
       </BrowserRouter>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -13,11 +12,7 @@ class Login extends Component {
     	}
     	axios.post('/login', credentials)
     		.then(res => {
-    			if (res.data.result == 'success') {
-    				this.props.handleUserAuth({isAuthed: true})
-    			} else {
-    				alert(res.data.result)
-    			}
+    			res.data.result === 'success' ? this.props.handleUserAuth({isAuthed: true}) : alert(res.data.result)
     		}) 
     }
 
