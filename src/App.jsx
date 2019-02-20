@@ -45,7 +45,7 @@ class App extends Component {
             handleUserAuth={this.handleUserAuth} 
             handleLogout={this.handleLogout}
           />
-          <Dashboard />
+          <Dashboard isAuthed={this.state.isAuthed}/>
         </div>
       </BrowserRouter>
     )
