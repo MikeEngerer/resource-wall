@@ -20,9 +20,18 @@ button:hover {
   border: none;
 }
 
+#register, #login {
+  margin: 10px auto;
+  border: 1px solid blue;
+  border-radius: 10px;
+  width: 25%;
+  padding-bottom: 20px; 
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: auto;
   align-items: center;
 }
