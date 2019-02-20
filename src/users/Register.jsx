@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -26,7 +25,7 @@ class Register extends Component {
 		return (         
 		<section id="register">
         <h1>Register</h1>
-        <form onSubmit={ this.handleRegister } >
+        <form className="login-form" onSubmit={ this.handleRegister } >
           <input type="email" name="email" placeholder="Email"/>
           <input type="text" name="name" placeholder="Name"/>
           <input type="password" name="password" placeholder="Password" />

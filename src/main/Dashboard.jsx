@@ -4,7 +4,14 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-            	<p>Dashboard</p>
+            	<p style={{textDecoration: 'underline'}}>Dashboard</p>
+            	<p>Some stuff</p>
+            	<p>Some stuff</p>
+            	<p>Some stuff</p>
+            	<p>Some stuff</p>
+            	<p>Some stuff</p>
+            	<p>Some stuff</p>
+            	<p>Some stuff</p>
             </div>
         );
     }
