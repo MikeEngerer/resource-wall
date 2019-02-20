@@ -12,11 +12,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieSession({
 	name: 'session',
-	keys: ['test']
+	keys: ['cookie']
 }))
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
+app.get('/cookie', (req, res) => {
+  req.session.id ? res.send({result: 'has cookie'}) : res.send({result: 'no cookie'})
 })
 
 app.post('/login', (req, res) => {
@@ -46,7 +46,6 @@ app.post('/register', (req, res) => {
 	.returning('*')
 	.where('email', email)
 	.then(resp => {
-		console.log(resp)
 		if (resp[0]) {
 			res.send({result: 'User already exists'})
 		} else {
@@ -68,9 +67,6 @@ app.post('/logout', (req, res) => {
 	res.send({result: 'Successfully logged out'})
 })
 
-// app.get('/server', (req, res) => {
-//   res.send({express: 'server connected to react' });
-// })
  
 app.listen(8080, () => {
 	console.log('app listening on 8080')

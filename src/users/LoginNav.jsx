@@ -24,25 +24,25 @@ class LoginNav extends Component {
     }
 	}
 
-    render() {
-        return (
-          	<div className="login-nav">
-	            { this.props.isAuthed ? (
-	              <div>
-	                <Redirect to="/dashboard" />
-	                <button onClick={this.props.handleLogout}>Log out</button>
-	              </div>
-	              ) : (
-	              <div>
-	                {this.switchLoginNav(window.location.href)}
-	                <Route path="/login" component={() => <Login handleUserAuth={this.props.handleUserAuth} />}/>
-	                <Route path="/register" component={() => <Register handleUserAuth={this.props.handleUserAuth} />}/>
-	              </div>
-                )
-	            }
-         	</div>
-        );
-    }
+  render() {
+    return (
+    	<div className="login-nav">
+        { this.props.isAuthed ? (
+          <div>
+            <Redirect to="/dashboard" />
+            <button onClick={this.props.handleLogout}>Log out</button>
+          </div>
+          ) : (
+          <div>
+            {this.switchLoginNav(window.location.href)}
+            <Route path="/login" component={() => <Login handleUserAuth={this.props.handleUserAuth} />}/>
+            <Route path="/register" component={() => <Register handleUserAuth={this.props.handleUserAuth} />}/>
+          </div>
+          )
+        }
+     	</div>
+    );
+  }
 }
 
 export default LoginNav;

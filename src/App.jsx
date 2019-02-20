@@ -14,6 +14,15 @@ class App extends Component {
     }
   }
 
+  componentWillMount() {
+    axios.get('/cookie')
+      .then(res => {
+        if (res.data.result === 'has cookie') {
+          this.setState({isAuthed: true})
+        }
+      })
+  }
+
   handleUserAuth = (data) => {
     let { isAuthed } =  data
     this.setState({isAuthed})
