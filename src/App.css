@@ -3,6 +3,23 @@
   text-align: center;
 }
 
+button {
+  outline: none;
+  border: 1px solid blue;
+  background-color: white;
+  color: blue;
+  margin: 5px;
+  height: 30px;
+  width: 100px;
+  width: calc(auto + 20px);
+}
+
+button:hover {
+  background-color: blue;
+  color: white;
+  border: none;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -11,17 +28,26 @@
 }
 
 .login-form input {
+  color:blue;
   text-align: center;
   height: 20px;
   border: 1px solid blue;
   margin-bottom: 5px;
 }
 
-button {
-  border: 1px solid blue;
+/*.login-form button {
   background-color: blue;
+  border:none;
   color: white;
   margin: 5px;
   height: 30px;
-  width: 100px;
+  width: calc(auto + 20px);
+}*/
+
+.login-form input:focus {
+  outline: none;
+}
+
+.login-form button:hover {
+  background-color: green;
 }

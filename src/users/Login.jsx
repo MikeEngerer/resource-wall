@@ -21,8 +21,8 @@ class Login extends Component {
           <section id="login">
             <h1>Login</h1>
             <form className="login-form" onSubmit={ this.handleLogin }>
-              <input type="email" name="email" placeholder="Email"/>
-              <input type="password" name="password" placeholder="Password" />
+              <input type="email" name="email" placeholder="Email" required/>
+              <input type="password" name="password" placeholder="Password"  required/>
               <button type="submit">Login</button>
             </form>
           </section>

@@ -6,12 +6,8 @@ class Dashboard extends Component {
             <div>
             	<p style={{textDecoration: 'underline'}}>Dashboard</p>
             	<p>Some stuff</p>
-            	<p>Some stuff</p>
-            	<p>Some stuff</p>
-            	<p>Some stuff</p>
-            	<p>Some stuff</p>
-            	<p>Some stuff</p>
-            	<p>Some stuff</p>
+            	<p>Some more stuff</p>
+            	<p>The most stuff</p>
             </div>
         );
     }

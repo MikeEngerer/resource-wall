@@ -26,11 +26,11 @@ class Register extends Component {
 		<section id="register">
         <h1>Register</h1>
         <form className="login-form" onSubmit={ this.handleRegister } >
-          <input type="email" name="email" placeholder="Email"/>
-          <input type="text" name="name" placeholder="Name"/>
-          <input type="password" name="password" placeholder="Password" />
-          <input type="password" name="passwordConfirm" placeholder="Confirm password" />
-          <button>Login</button>
+          <input type="email" name="email" placeholder="Email"required/>
+          <input type="text" name="name" placeholder="Name"required/>
+          <input type="password" name="password" placeholder="Password" required/>
+          <input type="password" name="passwordConfirm" placeholder="Confirm password" required/>
+          <button>Register</button>
         </form>
       </section>
     )
