@@ -16,7 +16,9 @@ app.use(cookieSession({
 }))
 
 app.get('/cookie', (req, res) => {
-  req.session.id ? res.send({result: 'has cookie'}) : res.send({result: 'no cookie'})
+	let result;
+  req.session.id ? result = 'logged in' : result = 'logged out'
+  res.send({ result });
 })
 
 app.post('/login', (req, res) => {
@@ -26,8 +28,8 @@ app.post('/login', (req, res) => {
 	.where('email', email)
 	.then(resp => {
 		if (resp[0]) {
-			bcrypt.compare(password, resp[0].password, (err, result) => {
-				if (result) {
+			bcrypt.compare(password, resp[0].password, (err, response) => {
+				if (response) {
 					req.session.id = uuid()
 					res.send({result: 'success'})
 				} else {

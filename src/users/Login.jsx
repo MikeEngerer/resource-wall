@@ -11,9 +11,9 @@ class Login extends Component {
     		password: e.target.password.value
     	}
     	axios.post('/login', credentials)
-    		.then(res => {
-    			res.data.result === 'success' ? this.props.handleUserAuth({isAuthed: true}) : alert(res.data.result)
-    		}) 
+		.then(res => {
+			res.data.result === 'success' ? this.props.handleUserAuth({isAuthed: true}) : alert(res.data.result)
+		}) 
     }
 
     render() {

@@ -17,7 +17,7 @@ class App extends Component {
   componentWillMount() {
     axios.get('/cookie')
       .then(res => {
-        if (res.data.result === 'has cookie') {
+        if (res.data.result === 'logged in') {
           this.setState({isAuthed: true})
         }
       })
@@ -31,9 +31,7 @@ class App extends Component {
   handleLogout = (e) => {
     e.preventDefault()
     axios.post('/logout')
-      .then(() => {
-        this.setState({ isAuthed: false })
-      })
+    .then(() => this.setState({ isAuthed: false }))
   }
 
   render() {
@@ -45,7 +43,7 @@ class App extends Component {
             handleUserAuth={this.handleUserAuth} 
             handleLogout={this.handleLogout}
           />
-          <Dashboard isAuthed={this.state.isAuthed}/>
+          <Dashboard isAuthed={this.state.isAuthed} />
         </div>
       </BrowserRouter>
     )
