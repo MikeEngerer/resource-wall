@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 
+import SideNav from './nav/SideNav.jsx'
 import LoginNav from './users/LoginNav.jsx'
 import Dashboard from './main/Dashboard.jsx'
 import './App.css';

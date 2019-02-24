@@ -3,6 +3,49 @@
   text-align: center;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-image: url('./mosaic-background-13 (1).jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+#login-register {
+  margin-top: 200px;
+  text-align: center;
+}
+
+.side-nav {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  height: 100%;
+  padding: 20px;
+  border-right: 1px solid black;
+  width: 100px;
+}
+
+.side-nav ul {
+  list-style-type: none;
+  width: 200px;
+}
+
+.side-nav li {
+  background-color: orange;
+  width: auto;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.btn-login-nav {
+  float: right;
+}
+
 button {
   outline: none;
   border: 1px solid blue;
@@ -11,7 +54,6 @@ button {
   margin: 5px;
   height: 30px;
   width: 100px;
-  width: calc(auto + 20px);
 }
 
 button:hover {
@@ -21,15 +63,18 @@ button:hover {
 }
 
 #register, #login {
+  background-color: white;
+
   margin: 10px auto;
-  border: 1px solid blue;
+  border:none;
   border-radius: 10px;
   width: 23%;
-  padding-bottom: 20px; 
+  padding: 20px 0px; 
 }
 
 #register h1, #login h1 {
   color: blue;
+  padding-bottom: 20px;
 }
 .login-form {
   display: flex;

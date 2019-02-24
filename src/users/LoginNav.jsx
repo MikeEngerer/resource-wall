@@ -8,17 +8,19 @@ class LoginNav extends Component {
 
 	switchLoginNav = (currentUrl) => {
     currentUrl = currentUrl.split('/')
+    let register = <Link to="/register"><button> Register </button></Link>
+    let login = <Link to="/login"><button> Login </button></Link>
     console.log('current path: ', '/' + currentUrl[currentUrl.length - 1])
     switch (currentUrl[currentUrl.length - 1]) {
       case 'login':
-        return <Link to="/register"><button> Register </button></Link>
+        return register;
       case 'register':
-        return <Link to="/login"><button> Login </button></Link>
+        return login;
       default:
         return (
           <div>
-            <Link to="/login"><button> Login </button></Link>
-            <Link to="/register"><button> Register </button></Link>
+            {register}
+            {login} 
           </div>
         )
     }
@@ -30,10 +32,10 @@ class LoginNav extends Component {
         { this.props.isAuthed ? (
           <div>
             <Redirect to="/dashboard" />
-            <button onClick={this.props.handleLogout}>Log out</button>
+            <button className="btn-login-nav" onClick={this.props.handleLogout}>Log out</button>
           </div>
           ) : (
-          <div>
+          <div id="login-register">
             {this.switchLoginNav(window.location.href)}
             <Route path="/login" component={() => <Login handleUserAuth={this.props.handleUserAuth} />}/>
             <Route path="/register" component={() => <Register handleUserAuth={this.props.handleUserAuth} />}/>

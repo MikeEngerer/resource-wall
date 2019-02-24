@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
+import SideNav from '../nav/SideNav.jsx'
+
 class Dashboard extends Component {
     render() {
         return (
         	<div className="dashboard">
         	{this.props.isAuthed ? 
-	            <div>
+                <div>
+                <SideNav />
 	            	<p style={{textDecoration: 'underline'}}>Dashboard</p>
 	            	<p>Some stuff</p>
 	            	<p>Some more stuff</p>
