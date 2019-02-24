@@ -1,4 +1,36 @@
+html {
 
+
+}
+
+.top-nav {
+	margin-right: 25px;
+	margin-left: 25px;
+	padding-top: 0;
+	margin-top: 0;
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
+	z-index: 100;
+}
+
+
+.legend {
+	display: flex;
+	flex-flow: row;
+	justify-content: flex-end;
+	text-align: center;
+}
+
+.legend h5 {
+	border-radius: 5px;
+	padding: 10px 10px;
+	margin: 10px;
+}
+.dashboard-container {
+	overflow: auto;
+	display: flex;
+	justify-content: space-between;
+}
 
 .login-nav {
 	text-align: right;
@@ -6,42 +38,51 @@
 	padding-top: 30px;
 }
 
-#title {
-	text-align: center;
-	margin-bottom: 0;
-	font-size: 50px;
-
-}
 
 .card-container {
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
-	width: auto;
+	width: 85%;
+}
+
+.menu {
+	border-right: 1px solid black;
+	padding-right: 20px;
+	width: 15%
+
+}
+
+#title {
+	text-align: center;
+	font-size: 50px;
 }
 
 .card {
 	background-color: white;
 	border: solid 1px black;
 	border-radius: 20px;
-	width: 20%;
-	margin: 20px;
+	width: 28%;
+	margin-bottom: 20px;
 	padding: 20px;
+}
+
+
+.menu li {
+	color: white;
+	display: block;
+	background-color: grey;
+	width: 80%;
+	padding: 10px;
+	margin: 10px;
+	float: left;
 }
 
 #legend-title {
 	margin-bottom: 0;
 }
 
-.legend {
-	display: flex;
-	justify-content: space-between;
-	width: 13%;
-}
 
-.legend h5 {
-	padding: 10px 10px;
-}
 
 #article {
 	background-color: green;
@@ -101,5 +142,5 @@ button {
 }
 
 .btn-edit {
-	float: left;
+	float: right;
 }
