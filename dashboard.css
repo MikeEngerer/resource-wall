@@ -1,0 +1,37 @@
+.card-container {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: auto;
+}
+
+.card {
+	border: solid 1px black;
+	width: 20%;
+	margin: 20px;
+	padding: 20px;
+}
+
+.card h1 {
+	text-align: center;
+}
+
+.btn-action-container {
+	float: right;
+}
+
+button {
+	background-color: blue;
+	border: none;
+	color: white;
+	width: 60px;
+	height: 30px
+}
+
+.btn-delete {
+	background-color: red;
+}
+
+.btn-edit {
+
+}

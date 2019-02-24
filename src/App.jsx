@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 
 import LoginNav from './users/LoginNav.jsx'
@@ -43,7 +43,7 @@ class App extends Component {
             handleUserAuth={this.handleUserAuth} 
             handleLogout={this.handleLogout}
           />
-          <Dashboard isAuthed={this.state.isAuthed} />
+          <Route path="/dashboard" component={() => <Dashboard isAuthed={this.state.isAuthed} />} />
         </div>
       </BrowserRouter>
     )
