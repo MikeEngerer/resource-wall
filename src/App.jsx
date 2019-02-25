@@ -10,7 +10,23 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      isAuthed: false
+      isAuthed: false,
+      content: [
+      {
+        type: 'article',
+        title: 'Card 1 Title',
+        description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
+        Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
+        Card 1 description Card 1 description Card 1 description '
+      },
+      {
+        type: 'website',
+        title: 'Card 2 Title',
+        description: 'Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description \
+        Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description \
+        Card 2 description Card 2 description Card 2 description Card 2 description '
+      }
+      ]
     }
   }
 
@@ -46,7 +62,7 @@ class App extends Component {
             handleLogout={this.handleLogout}
           />
           <Route path="/dashboard" component={() => 
-            <Dashboard isAuthed={this.state.isAuthed} />
+            <Dashboard content={this.state.content} isAuthed={this.state.isAuthed} />
           }/>
         </div>
       </BrowserRouter>
