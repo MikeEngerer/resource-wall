@@ -36,6 +36,7 @@ class LoginNav extends Component {
           </div>
           ) : (
           <div id="login-register">
+            <Redirect to="/" />
             {this.switchLoginNav(window.location.href)}
             <Route path="/login" component={() => <Login handleUserAuth={this.props.handleUserAuth} />}/>
             <Route path="/register" component={() => <Register handleUserAuth={this.props.handleUserAuth} />}/>

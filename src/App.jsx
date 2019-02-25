@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 
-import SideNav from './nav/SideNav.jsx'
 import LoginNav from './users/LoginNav.jsx'
 import Dashboard from './main/Dashboard.jsx'
 import './App.css';
@@ -16,12 +15,13 @@ class App extends Component {
   }
 
   componentWillMount() {
+    // fetches cookie via server and sets auth
     axios.get('/cookie')
-      .then(res => {
-        if (res.data.result === 'logged in') {
-          this.setState({isAuthed: true})
-        }
-      })
+    .then(res => {
+      if (res.data.result === 'logged in') {
+        this.setState({isAuthed: true})
+      }
+    })
   }
 
   handleUserAuth = (data) => {
@@ -36,15 +36,18 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <BrowserRouter>
-        <div className="App">
-          <LoginNav 
+        <div className="App" >
+          <LoginNav
             isAuthed={this.state.isAuthed} 
             handleUserAuth={this.handleUserAuth} 
             handleLogout={this.handleLogout}
           />
-          <Route path="/dashboard" component={() => <Dashboard isAuthed={this.state.isAuthed} />} />
+          <Route path="/dashboard" component={() => 
+            <Dashboard isAuthed={this.state.isAuthed} />
+          }/>
         </div>
       </BrowserRouter>
     )

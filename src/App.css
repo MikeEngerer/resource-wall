@@ -8,14 +8,8 @@
   margin: 0;
 }
 
-body {
-  background-image: url('./mosaic-background-13 (1).jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-
-}
-
 #login-register {
+  height: 100%;
   margin-top: 200px;
   text-align: center;
 }
@@ -64,9 +58,8 @@ button:hover {
 
 #register, #login {
   background-color: white;
-
   margin: 10px auto;
-  border:none;
+  border: 1px solid blue;
   border-radius: 10px;
   width: 23%;
   padding: 20px 0px; 
