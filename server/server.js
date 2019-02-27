@@ -15,12 +15,14 @@ app.use(cookieSession({
 	keys: ['cookie']
 }))
 
+// sends cookie status msg to client for auth purposes
 app.get('/cookie', (req, res) => {
 	let result;
   req.session.id ? result = 'logged in' : result = 'logged out'
   res.send({ result });
 })
 
+// on login, if email in db check pass hash and set cookie, else send err
 app.post('/login', (req, res) => {
 	let { email, password } = req.body
 	knex('Users')
@@ -41,6 +43,7 @@ app.post('/login', (req, res) => {
 		}
 	})
 })
+
 
 app.post('/register', (req, res) => {
 	let { email, name, password } = req.body

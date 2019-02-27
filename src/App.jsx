@@ -14,6 +14,15 @@ class App extends Component {
       content: [
       {
         type: 'article',
+        color: 'blue',
+        title: 'Card 1 Title',
+        description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
+        Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
+        Card 1 description Card 1 description Card 1 description '
+      },
+      {
+        type: 'article',
+        color: 'blue',
         title: 'Card 1 Title',
         description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
         Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
@@ -21,6 +30,7 @@ class App extends Component {
       },
       {
         type: 'website',
+        color: 'green',
         title: 'Card 2 Title',
         description: 'Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description \
         Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description \
