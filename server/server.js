@@ -27,6 +27,7 @@ app.get('/posts', (req, res) => {
 	.where({user_id: req.session.id})
 	.returning('*')
 	.then(resp => {
+		console.log(resp)
 		res.send(resp)
 	})
 })
@@ -38,7 +39,7 @@ app.post('/posts/new', (req, res) => {
 
 	knex('Posts')
 	.returning('*')
-	.insert({type, title, content, image, link})
+	.insert({type, title, content, image, link, user_id: req.session.id})
 	.then(resp => {
 		res.send(resp)
 	})
@@ -56,7 +57,7 @@ app.post('/login', (req, res) => {
 			bcrypt.compare(password, resp[0].password, (err, response) => {
 				if (response) {
 					req.session.id = resp[0].id
-					console.log(req.session.id)
+					console.log('login id', req.session.id)
 					res.send({result: 'success'})
 				} else {
 					res.send({result: 'invalid password'})
@@ -84,6 +85,7 @@ app.post('/register', (req, res) => {
 				.returning('id')
 				.then((response) => {
           req.session.id = response[0].id
+          console.log('register id', req.session.id)
           res.send({result: 'success'})
         })
 			})

@@ -16,20 +16,9 @@ class App extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // fetches cookie via server and sets auth
-    axios.get('/cookie')
-    .then(res => {
-      if (res.data.result === 'logged in' && !this.state.isAuthed) {
-        this.setState({isAuthed: true})
-      }
-    })
-
-    axios.get('/posts')
-    .then(res => {
-      console.log('HERE', res)
-      this.setState({content: res.data}, () => console.log('content', this.state.content))
-    })
+    this.checkCookie()
   }
 
   handleNewPost = (data) => {
@@ -37,7 +26,6 @@ class App extends Component {
     .then(res => {
       let oldPosts = this.state.content
       let newPosts = [...oldPosts, res.data[0]]
-      console.log(res.data[0])
       this.setState({content: newPosts})
     })
   }
@@ -45,12 +33,29 @@ class App extends Component {
   handleUserAuth = (data) => {
     let { isAuthed } =  data
     this.setState({isAuthed})
+    this.fetchPosts()
   }
 
   handleLogout = (e) => {
     e.preventDefault()
     axios.post('/logout')
-    .then(() => this.setState({ isAuthed: false }))
+    .then(() => this.setState({ isAuthed: false, content: [] }))
+  }
+
+  checkCookie = () => {
+    axios.get('/cookie')
+    .then(res => {
+      if (res.data.result === 'logged in' && !this.state.isAuthed) {
+        this.setState({isAuthed: true})
+      }
+    })
+  }
+
+  fetchPosts = () => {
+    axios.get('/posts')
+    .then(res => {
+      this.setState({content: res.data}, () => console.log('content', this.state.content))
+    })
   }
 
   render() {
