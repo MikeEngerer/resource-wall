@@ -11,30 +11,25 @@ class App extends Component {
     super()
     this.state = {
       isAuthed: false,
+      currentUser: null,
       content: [
       {
         type: 'article',
         color: 'blue',
         title: 'Card 1 Title',
-        description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
-        Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
-        Card 1 description Card 1 description Card 1 description '
+        description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description'
       },
       {
         type: 'article',
         color: 'blue',
         title: 'Card 1 Title',
-        description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
-        Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description \
-        Card 1 description Card 1 description Card 1 description '
+        description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description'
       },
       {
         type: 'website',
         color: 'green',
         title: 'Card 2 Title',
-        description: 'Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description \
-        Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description \
-        Card 2 description Card 2 description Card 2 description Card 2 description '
+        description: 'Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description'
       }
       ]
     }
@@ -44,9 +39,19 @@ class App extends Component {
     // fetches cookie via server and sets auth
     axios.get('/cookie')
     .then(res => {
-      if (res.data.result === 'logged in') {
+      if (res.data.result === 'logged in' && !this.state.isAuthed) {
         this.setState({isAuthed: true})
       }
+    })
+  }
+
+  handleNewPost = (data) => {
+    axios.post('/posts/new', data)
+    .then(res => {
+      let oldPosts = this.state.content
+      let newPosts = [...oldPosts, res.data[0]]
+      console.log(res.data[0])
+      this.setState({content: newPosts})
     })
   }
 
@@ -72,7 +77,7 @@ class App extends Component {
             handleLogout={this.handleLogout}
           />
           <Route path="/dashboard" component={() => 
-            <Dashboard content={this.state.content} isAuthed={this.state.isAuthed} />
+            <Dashboard content={this.state.content} handleNewPost={this.handleNewPost} isAuthed={this.state.isAuthed} />
           }/>
         </div>
       </BrowserRouter>

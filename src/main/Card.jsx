@@ -6,13 +6,13 @@ class Card extends Component {
         return (
             <div className={`card ${this.props.type}`}>
             	<h1>{this.props.title}</h1>
-            	<div class="card-body">
-            		<p>{this.props.description}</p>
+            	<div className="card-body">
+            		<p>{this.props.content}</p>
             	</div>
-            	<div class="btn-action-container">
-					<button class="btn-details">details</button>
-					<button class="btn-edit">edit</button>
-					<button class="btn-delete">delete</button>
+            	<div className="btn-action-container">
+					<button className="btn-details">details</button>
+					<button className="btn-edit">edit</button>
+					<button className="btn-delete">delete</button>
 				</div>	
             </div>
         );

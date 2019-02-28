@@ -22,6 +22,20 @@ app.get('/cookie', (req, res) => {
   res.send({ result });
 })
 
+app.post('/posts/new', (req, res) => {
+	let { type, title, content, } = req.body,
+			image = checkItemExists(req.body, 'image') ? req.body.image : null;
+			link = checkItemExists(req.body, 'link') ? req.body.link : null;
+
+	knex('Posts')
+	.returning('*')
+	.insert({type, title, content, image, link})
+	.then(resp => {
+		res.send(resp)
+	})
+})
+
+
 // on login, if email in db check pass hash and set cookie, else send err
 app.post('/login', (req, res) => {
 	let { email, password } = req.body
@@ -76,3 +90,7 @@ app.post('/logout', (req, res) => {
 app.listen(8080, () => {
 	console.log('app listening on 8080')
 })
+
+checkItemExists = (data, attr) => {
+	return data[attr]
+}
