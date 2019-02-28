@@ -12,26 +12,7 @@ class App extends Component {
     this.state = {
       isAuthed: false,
       currentUser: null,
-      content: [
-      {
-        type: 'article',
-        color: 'blue',
-        title: 'Card 1 Title',
-        description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description'
-      },
-      {
-        type: 'article',
-        color: 'blue',
-        title: 'Card 1 Title',
-        description: 'Card 1 description Card 1 description Card 1 description Card 1 description Card 1 description'
-      },
-      {
-        type: 'website',
-        color: 'green',
-        title: 'Card 2 Title',
-        description: 'Card 2 description Card 2 description Card 2 description Card 2 description Card 2 description'
-      }
-      ]
+      content: []
     }
   }
 
@@ -42,6 +23,12 @@ class App extends Component {
       if (res.data.result === 'logged in' && !this.state.isAuthed) {
         this.setState({isAuthed: true})
       }
+    })
+
+    axios.get('/posts')
+    .then(res => {
+      console.log('HERE', res)
+      this.setState({content: res.data}, () => console.log('content', this.state.content))
     })
   }
 

@@ -22,6 +22,15 @@ app.get('/cookie', (req, res) => {
   res.send({ result });
 })
 
+app.get('/posts', (req, res) => {
+	knex('Posts')
+	.where({user_id: req.session.id})
+	.returning('*')
+	.then(resp => {
+		res.send(resp)
+	})
+})
+
 app.post('/posts/new', (req, res) => {
 	let { type, title, content, } = req.body,
 			image = checkItemExists(req.body, 'image') ? req.body.image : null;
@@ -46,7 +55,8 @@ app.post('/login', (req, res) => {
 		if (resp[0]) {
 			bcrypt.compare(password, resp[0].password, (err, response) => {
 				if (response) {
-					req.session.id = uuid()
+					req.session.id = resp[0].id
+					console.log(req.session.id)
 					res.send({result: 'success'})
 				} else {
 					res.send({result: 'invalid password'})
@@ -71,8 +81,9 @@ app.post('/register', (req, res) => {
 			password = bcrypt.hash(password, 10, (err, hash) => {
 				knex('Users')
 				.insert({name, email, password: hash})
-				.then(() => {
-          req.session.id = uuid()
+				.returning('id')
+				.then((response) => {
+          req.session.id = response[0].id
           res.send({result: 'success'})
         })
 			})
