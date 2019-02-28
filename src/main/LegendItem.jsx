@@ -4,7 +4,7 @@ class LegendItem extends Component {
 
     render() {
         return (
-            <li> {this.props.type} </li>
+            <li> {this.props.type} {this.props.color}</li>
         );
     }
 }

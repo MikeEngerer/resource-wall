@@ -3,14 +3,19 @@ import React, { Component } from 'react';
 import LegendItem from './LegendItem.jsx'
 
 class Legend extends Component {
-    
+
     filterUniqueContentByType = (content) => {
-      let unqiueItems = content.reduce((a, e) => {
-        let pos = content.map(el => el.type).indexOf(e);
-        console.log(pos)
-        return a
-      }, [])
-    } 
+      let types = {},
+          uniqueItems = []
+
+      content.forEach(e => {
+        return types[e.type] = e.color
+      })
+      for (let item in types) {
+        uniqueItems.push({[item]: types[item]})
+      }
+      return uniqueItems;
+    }
 
     render() {
       this.filterUniqueContentByType(this.props.content)
@@ -18,7 +23,8 @@ class Legend extends Component {
             <div className="legend">
               <ul className="legend-list">
                 {this.filterUniqueContentByType(this.props.content).map((e) => {
-                  return <LegendItem type={e.type} color={e.color}/>
+                  let key = Object.keys(e)
+                  return <LegendItem type={key[0]} color={e[key[0]]}/>
                 })}
               </ul>
             </div>
