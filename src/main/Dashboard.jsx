@@ -24,7 +24,7 @@ class Dashboard extends Component {
         	{this.props.isAuthed ? 
                 <div>
                     <SideNav />
-                    <ContentList content={this.props.content}/>
+                    <ContentList deletePost={this.props.deletePost} editPost={this.props.editPost} content={this.props.content}/>
 	                <Legend content={this.props.content}/>   
                     {this.state.showNewPostForm ? <NewPost handleNewPost={this.props.handleNewPost} showNewPostForm={this.showNewPostForm}/> : <button onClick={this.showNewPostForm}>New Post</button>}
                 </div>	

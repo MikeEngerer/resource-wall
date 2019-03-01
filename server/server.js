@@ -36,7 +36,6 @@ app.post('/posts/new', (req, res) => {
 	let { type, title, content, } = req.body,
 			image = checkItemExists(req.body, 'image') ? req.body.image : null;
 			link = checkItemExists(req.body, 'link') ? req.body.link : null;
-
 	knex('Posts')
 	.returning('*')
 	.insert({type, title, content, image, link, user_id: req.session.id})
@@ -69,7 +68,15 @@ app.post('/login', (req, res) => {
 	})
 })
 
-
+app.post('/posts/:post_id/delete', (req, res) => {
+	let postId = req.params.post_id;
+	knex('Posts')
+		.where('id', postId)
+		.del()
+		.then(() => {
+			res.send('post deleted')
+		})
+})
 app.post('/register', (req, res) => {
 	let { email, name, password } = req.body
 	knex('Users')

@@ -18,7 +18,11 @@ class App extends Component {
 
   componentDidMount() {
     // fetches cookie via server and sets auth
-    this.checkCookie()
+    this.checkCookie().then(() => {
+      if (this.state.isAuthed) { 
+        this.fetchPosts()
+      }
+    })
   }
 
   handleNewPost = (data) => {
@@ -28,6 +32,25 @@ class App extends Component {
       let newPosts = [...oldPosts, res.data[0]]
       this.setState({content: newPosts})
     })
+  }
+
+  deletePost = (postId) => {
+    let { content } = this.state
+    let newPosts = content.filter(e => e.id !== postId)
+    axios.post(`/posts/${postId}/delete`)
+    .then((res) => {
+      this.setState({content: newPosts})
+    })
+  }
+
+  editPost = (postId, postUpdate) => {
+    let { content } = this.state
+    let updatedPost = content.filter(e => e.id === postId)
+    updatedPost = postUpdate
+    let postIndex = content.indexOf(updatedPost)
+    content.splice(postIndex, 1)
+    let newPosts = [...content, updatedPost]
+    this.setState({content: newPosts})
   }
 
   handleUserAuth = (data) => {
@@ -43,11 +66,15 @@ class App extends Component {
   }
 
   checkCookie = () => {
-    axios.get('/cookie')
-    .then(res => {
-      if (res.data.result === 'logged in' && !this.state.isAuthed) {
-        this.setState({isAuthed: true})
-      }
+    return new Promise((resolve, reject) => {    
+      axios.get('/cookie')
+      .then(res => {
+        if (res.data.result === 'logged in' && !this.state.isAuthed) {
+          resolve(this.setState({isAuthed: true}))
+        } else {
+          reject('server error!!!!')
+        }
+      })
     })
   }
 
@@ -69,7 +96,13 @@ class App extends Component {
             handleLogout={this.handleLogout}
           />
           <Route path="/dashboard" component={() => 
-            <Dashboard content={this.state.content} handleNewPost={this.handleNewPost} isAuthed={this.state.isAuthed} />
+            <Dashboard 
+              content={this.state.content} 
+              handleNewPost={this.handleNewPost} 
+              isAuthed={this.state.isAuthed} 
+              editPost={this.editPost}
+              deletePost={this.deletePost}
+            />
           }/>
         </div>
       </BrowserRouter>

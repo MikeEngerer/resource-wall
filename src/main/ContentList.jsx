@@ -5,10 +5,18 @@ import Card from './Card.jsx'
 class ContentList extends Component {
 
     render() {
-      console.log(this.props.content[this.props.content.length - 1])
         return (
             <div className="content-container">
-            {this.props.content.map((item) => <Card key={Math.random()} type={item.type} title={item.title} content={item.content} />)}
+            {this.props.content.map((item) => <Card 
+                key={Math.random()} 
+                postId={item.id}
+                type={item.type}
+                title={item.title} 
+                content={item.content} 
+                deletePost={this.props.deletePost}
+                editPost={this.props.editPost}
+                />
+            )}
             </div>
         );
     }
