@@ -27,7 +27,6 @@ app.get('/posts', (req, res) => {
 	.where({user_id: req.session.id})
 	.returning('*')
 	.then(resp => {
-		console.log(resp)
 		res.send(resp)
 	})
 })
@@ -77,6 +76,17 @@ app.post('/posts/:post_id/delete', (req, res) => {
 			res.send('post deleted')
 		})
 })
+
+app.post('/posts/:post_id/edit', (req, res) => {
+	let postId = req.params.post_id
+	console.log(req.body)
+	knex('Posts')
+	.where({id: postId})
+	.update(req.body)
+	.then(() => {
+		res.send('updated')
+	})
+})
 app.post('/register', (req, res) => {
 	let { email, name, password } = req.body
 	knex('Users')
@@ -86,12 +96,12 @@ app.post('/register', (req, res) => {
 		if (resp[0]) {
 			res.send({result: 'User already exists'})
 		} else {
-			password = bcrypt.hash(password, 10, (err, hash) => {
+			bcrypt.hash(password, 10, (err, hash) => {
 				knex('Users')
 				.insert({name, email, password: hash})
 				.returning('id')
 				.then((response) => {
-          req.session.id = response[0].id
+          req.session.id = response[0]
           console.log('register id', req.session.id)
           res.send({result: 'success'})
         })

@@ -18,6 +18,7 @@ class Card extends Component {
         let { title, type, content, link, image } = this.props;
         let t = e.target
         let data = {
+            id: this.props.postId,
             type: t.type.value || type,
             title: t.title.value || title,
             content: t.content.value || content,

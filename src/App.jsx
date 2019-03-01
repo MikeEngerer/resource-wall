@@ -17,8 +17,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // fetches cookie via server and sets auth
-    this.checkCookie().then(() => {
+    // fetches cookie via server and sets auth, then fetches user's posts 
+    this.checkCookie().then((res) => {
+      console.log('res', res)
       if (this.state.isAuthed) { 
         this.fetchPosts()
       }
@@ -36,7 +37,7 @@ class App extends Component {
 
   deletePost = (postId) => {
     let { content } = this.state
-    let newPosts = content.filter(e => e.id !== postId)
+    let newPosts = content.filter(e => e.id !== postId).sort((a, b) => b.id - a.id)
     axios.post(`/posts/${postId}/delete`)
     .then((res) => {
       this.setState({content: newPosts})
@@ -46,11 +47,15 @@ class App extends Component {
   editPost = (postId, postUpdate) => {
     let { content } = this.state
     let updatedPost = content.filter(e => e.id === postId)
-    updatedPost = postUpdate
     let postIndex = content.indexOf(updatedPost)
+    updatedPost = postUpdate
     content.splice(postIndex, 1)
-    let newPosts = [...content, updatedPost]
-    this.setState({content: newPosts})
+    let newPosts = [...content, updatedPost].sort((a, b) => b.id - a.id)
+    console.log(newPosts)
+    axios.post(`/posts/${postId}/edit`, updatedPost)
+    .then((res) => {
+      this.setState({content: newPosts})
+    })
   }
 
   handleUserAuth = (data) => {
@@ -81,6 +86,7 @@ class App extends Component {
   fetchPosts = () => {
     axios.get('/posts')
     .then(res => {
+      res.data.sort((a, b) => b.id - a.id)
       this.setState({content: res.data}, () => console.log('content', this.state.content))
     })
   }
