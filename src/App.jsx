@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
+import Details from './main/Details.jsx'
 import LoginNav from './users/LoginNav.jsx'
 import Dashboard from './main/Dashboard.jsx'
 import './App.css';
@@ -12,7 +13,11 @@ class App extends Component {
     this.state = {
       isAuthed: false,
       currentUser: null,
-      content: []
+      content: [],
+      details: {
+        display: false,
+        postId: null
+      }
     }
   }
 
@@ -90,27 +95,48 @@ class App extends Component {
     })
   }
 
+  handleDetails = (postId) => {
+    let details = {
+      display: true,
+      postId
+    }
+    this.setState({details})
+  }
+
+  getPostDetails = (postId) => {
+    return this.state.content.filter((e) => e.id === postId)
+  }
+
   render() {
-    return (
-      <BrowserRouter>
-        <div className="App" >
-          <LoginNav
-            isAuthed={this.state.isAuthed} 
-            handleUserAuth={this.handleUserAuth} 
-            handleLogout={this.handleLogout}
-          />
-          <Route path="/dashboard" component={() => 
-            <Dashboard 
-              content={this.state.content} 
-              handleNewPost={this.handleNewPost} 
+    if (this.state.details.display) {
+      return (
+        <BrowserRouter>
+          <Route path={`/posts/${this.state.details.postId}`} render={() => <Details post={this.getPostDetails(this.state.details.postId)}/>}/>
+        </BrowserRouter>
+      )
+    } else {
+      return (
+        <BrowserRouter>
+          <div className="App" >
+            <LoginNav
               isAuthed={this.state.isAuthed} 
-              editPost={this.editPost}
-              deletePost={this.deletePost}
+              handleUserAuth={this.handleUserAuth} 
+              handleLogout={this.handleLogout}
             />
-          }/>
-        </div>
-      </BrowserRouter>
-    )
+            <Route path="/posts" component={() => 
+              <Dashboard 
+                content={this.state.content} 
+                handleNewPost={this.handleNewPost} 
+                isAuthed={this.state.isAuthed} 
+                editPost={this.editPost}
+                deletePost={this.deletePost}
+                handleDetails={this.handleDetails}
+              />
+            }/>
+          </div>
+        </BrowserRouter>
+      )
+    }
   }
 }
 

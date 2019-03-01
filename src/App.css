@@ -1,4 +1,4 @@
-html, body, #root {
+html, body, #root, .dashboard {
   height: 100%;
 }
 .App {
@@ -26,7 +26,9 @@ html, body, #root {
   margin-top: 5%;
   display: flex;
   float: right;
-  width: 80%
+  height: 100%;
+  width: 80%;
+  overflow: auto;
 }
 
 #login-register {
@@ -68,6 +70,39 @@ button:hover {
   border: none;
 }
 
+#new-post, .edit-form {
+  position: relative;
+  z-index: 2;
+  height: 350px;
+  width: 500px;
+}
+
+.legend {
+  float: right;
+}
+
+.edit-form {  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.edit-form select {
+  padding: 0;
+  border: none;
+  text-align: center;
+}
+
+.edit-form textarea {
+  width: auto;
+  height: 100px;
+  resize: none;
+}
+
+.edit-form label {
+  text-align: left;
+  font-size: 20px;
+}
 
 #register, #login, #new-post {
   background-color: white;

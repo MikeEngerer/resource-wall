@@ -31,7 +31,7 @@ class LoginNav extends Component {
     	<div className="login-nav">
         { this.props.isAuthed ? (
           <div>
-            <Redirect to="/dashboard" />
+            <Redirect to="/posts" />
             <button className="btn-login-nav" onClick={this.props.handleLogout}>Log out</button>
           </div>
           ) : (

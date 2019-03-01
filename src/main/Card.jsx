@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import EditPostForm from './EditPostForm.jsx'
 class Card extends Component {
@@ -42,7 +43,7 @@ class Card extends Component {
             		<p>{content}</p>
             	</div>
             	<div className="btn-action-container">
-					<button onClick={this.showPostDetails} className="btn-details">details</button>
+					<Link to={`/posts/${postId}`}><button onClick={() => this.props.handleDetails(postId)} className="btn-details">details</button></Link>
 					{ !this.state.showEditForm ? (
                             <button onClick={this.toggleEditForm} className="btn-edit">edit</button> 
                         ) : (

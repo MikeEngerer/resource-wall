@@ -15,6 +15,7 @@ class ContentList extends Component {
                 content={item.content} 
                 deletePost={this.props.deletePost}
                 editPost={this.props.editPost}
+                handleDetails={this.props.handleDetails}
                 />
             )}
             </div>

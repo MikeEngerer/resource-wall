@@ -28,12 +28,13 @@ class Dashboard extends Component {
                         deletePost={this.props.deletePost} 
                         editPost={this.props.editPost} 
                         content={this.props.content}
+                        handleDetails={this.props.handleDetails}
                     />
 	                <Legend content={this.props.content}/>   
                     {this.state.showNewPostForm ? ( 
                         <NewPost 
                             handleNewPost={this.props.handleNewPost} 
-                            showNewPostForm={this.showNewPostForm}
+                            showNewPostForm={this.props.showNewPostForm}
                         />
                         ) : (
                         <button onClick={this.showNewPostForm}>New Post</button>
