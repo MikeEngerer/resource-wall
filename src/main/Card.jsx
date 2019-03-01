@@ -30,9 +30,7 @@ class Card extends Component {
 
     toggleEditForm = () => {
         let { showEditForm } = this.state
-        this.setState({showEditForm: !showEditForm}, () => {
-            console.log(this.state.showEditForm)
-        })
+        this.setState({showEditForm: !showEditForm})
 
     }
     render() {

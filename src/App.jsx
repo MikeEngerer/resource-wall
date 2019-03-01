@@ -19,7 +19,6 @@ class App extends Component {
   componentDidMount() {
     // fetches cookie via server and sets auth, then fetches user's posts 
     this.checkCookie().then((res) => {
-      console.log('res', res)
       if (this.state.isAuthed) { 
         this.fetchPosts()
       }
@@ -87,12 +86,11 @@ class App extends Component {
     axios.get('/posts')
     .then(res => {
       res.data.sort((a, b) => b.id - a.id)
-      this.setState({content: res.data}, () => console.log('content', this.state.content))
+      this.setState({content: res.data})
     })
   }
 
   render() {
-
     return (
       <BrowserRouter>
         <div className="App" >

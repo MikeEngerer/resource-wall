@@ -55,7 +55,6 @@ app.post('/login', (req, res) => {
 			bcrypt.compare(password, resp[0].password, (err, response) => {
 				if (response) {
 					req.session.id = resp[0].id
-					console.log('login id', req.session.id)
 					res.send({result: 'success'})
 				} else {
 					res.send({result: 'invalid password'})
@@ -79,7 +78,6 @@ app.post('/posts/:post_id/delete', (req, res) => {
 
 app.post('/posts/:post_id/edit', (req, res) => {
 	let postId = req.params.post_id
-	console.log(req.body)
 	knex('Posts')
 	.where({id: postId})
 	.update(req.body)
@@ -102,7 +100,6 @@ app.post('/register', (req, res) => {
 				.returning('id')
 				.then((response) => {
           req.session.id = response[0]
-          console.log('register id', req.session.id)
           res.send({result: 'success'})
         })
 			})

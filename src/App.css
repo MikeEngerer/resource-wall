@@ -1,6 +1,10 @@
+html, body, #root {
+  height: 100%;
+}
 .App {
   font-family: 'Roboto', sans-serif;
   text-align: center;
+  height: 100%
 }
 
 * {
@@ -65,7 +69,7 @@ button:hover {
 }
 
 
-#register, #login {
+#register, #login, #new-post {
   background-color: white;
   margin: 10px auto;
   border: 1px solid blue;
@@ -78,7 +82,7 @@ button:hover {
   color: blue;
   padding-bottom: 20px;
 }
-.login-form {
+.login-form, .post-form {
   display: flex;
   flex-direction: column;
   justify-content: center;

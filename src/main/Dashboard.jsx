@@ -13,9 +13,9 @@ class Dashboard extends Component {
         }
     }
 
-
     showNewPostForm = () => {
-        !this.state.showNewPostForm ? this.setState({showNewPostForm: true}) : this.setState({showNewPostForm: false})
+        let { showNewPostForm } = this.state;
+        this.setState({showNewPostForm: !showNewPostForm})
     }
 
     render() {
@@ -24,9 +24,21 @@ class Dashboard extends Component {
         	{this.props.isAuthed ? 
                 <div>
                     <SideNav />
-                    <ContentList deletePost={this.props.deletePost} editPost={this.props.editPost} content={this.props.content}/>
+                    <ContentList 
+                        deletePost={this.props.deletePost} 
+                        editPost={this.props.editPost} 
+                        content={this.props.content}
+                    />
 	                <Legend content={this.props.content}/>   
-                    {this.state.showNewPostForm ? <NewPost handleNewPost={this.props.handleNewPost} showNewPostForm={this.showNewPostForm}/> : <button onClick={this.showNewPostForm}>New Post</button>}
+                    {this.state.showNewPostForm ? ( 
+                        <NewPost 
+                            handleNewPost={this.props.handleNewPost} 
+                            showNewPostForm={this.showNewPostForm}
+                        />
+                        ) : (
+                        <button onClick={this.showNewPostForm}>New Post</button>
+                        )
+                    }
                 </div>	
         	:
         		<p>Login or Register to get started!</p>
